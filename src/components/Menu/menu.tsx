@@ -7,11 +7,10 @@ export default function Menu() {
         <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/about">About</Link>
+        <Link href="/courses">Cursos</Link>
       </li>
-
       <li>
-        <Link href="/imc">Imc</Link>
+        <Link href="/products">Produtos</Link>
       </li>
     </ul>
   );
