@@ -1,4 +1,5 @@
 import { getClass } from "@/api/courses.api";
+import Link from "next/link";
 
 interface Params {
   class: string;
@@ -15,6 +16,7 @@ export default async function ClassPage({
 
   return (
     <div>
+      <Link href={`/courses/${course}`}>Voltar</Link>
       <h1>{data.nome}</h1>
       <p>{data.descricao}</p>
       <p>Duração: {data.tempo} min</p>

@@ -6,11 +6,14 @@ export default async function CoursesPage() {
 
   return (
     <div>
-      {curses.map((course) => (
-        <div key={course.id}>
-          <Link href={`/courses/${course.slug}`}>{course.nome}</Link>
-        </div>
-      ))}
+      <h1>Cursos</h1>
+      <ul>
+        {curses.map((course) => (
+          <li key={course.id}>
+            <Link href={`/courses/${course.slug}`}>{course.nome}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
