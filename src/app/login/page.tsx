@@ -1,5 +1,6 @@
 "use client";
 
+import { login } from "@/actions/login";
 import { loginAPI } from "@/api/login.api";
 
 export default function LoginPage() {
@@ -8,10 +9,10 @@ export default function LoginPage() {
 
     const username = e.currentTarget.username.value;
     const password = e.currentTarget.password.value;
-
     try {
-      const login = await loginAPI({ username, password });
-      if (login.authorized) {
+      // const userLogin = await loginAPI({ username, password }); // with api
+      const userLogin = await login({ username, password }); // with server actions
+      if (userLogin.authorized) {
         window.location.href = "/";
       } else window.alert("Usuário ou senha inválidos");
     } catch (error) {

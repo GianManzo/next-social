@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { setCookies } from "@/actions/cookies";
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -20,11 +20,8 @@ export async function POST(request: NextRequest) {
   }
 
   const responseAPI = await response.json();
-  const cookiesNext = await cookies();
 
-  cookiesNext.set("token", responseAPI.token, {
-    httpOnly: true,
-  });
+  await setCookies("token", responseAPI.token);
 
   return Response.json({
     authorized: true,

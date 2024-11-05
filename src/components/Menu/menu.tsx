@@ -1,31 +1,48 @@
-import { getUser } from "@/api/profile.api";
+"use client";
 
+import { useSession } from "@/hooks/useSession";
 import Link from "next/link";
+import { useEffect } from "react";
 
-export default async function Menu() {
-  const userLogged = await getUser();
+export default function Menu() {
+  const { handleLoggout, userLogged, handleLogin, loading } = useSession();
+
+  useEffect(() => {
+    handleLogin();
+  }, [handleLogin]);
 
   return (
-    <ul className="menu">
-      <li>
-        <Link href="/">Home</Link>
-      </li>
-      <li>
-        <Link href="/courses">Cursos</Link>
-      </li>
-      <li>
-        <Link href="/products">Produtos</Link>
-      </li>
-      <li>
-        <Link href="/actions">Acões</Link>
-      </li>
-      <li>
-        {userLogged.autorizado ? (
-          userLogged.usuario
+    <>
+      <ul className="menu">
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/courses">Cursos</Link>
+        </li>
+        <li>
+          <Link href="/products">Produtos</Link>
+        </li>
+        <li>
+          <Link href="/actions">Ações</Link>
+        </li>
+        {loading ? (
+          <></>
         ) : (
-          <Link href="/login">Entrar</Link>
+          <li>
+            {userLogged?.autorizado ? (
+              <>
+                {userLogged?.usuario}
+                <button type="button" onClick={handleLoggout}>
+                  Sair
+                </button>
+              </>
+            ) : (
+              <Link href="/login">Entrar</Link>
+            )}
+          </li>
         )}
-      </li>
-    </ul>
+      </ul>
+    </>
   );
 }
