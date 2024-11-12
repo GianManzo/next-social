@@ -1,35 +1,18 @@
 "use client";
 
-import { addProductAction, IProduct } from "@/actions/products";
-import { redirectAction } from "@/actions/redirect";
-import { revalidateTagAction } from "@/actions/revalidate";
+import { addProductAction } from "@/actions/products";
+import { ButtonForm } from "@/components/ButtonForm/ButtonForm";
+import { useActionState } from "react";
 
 export default function AddProducstPage() {
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [state, formActions] = useActionState(addProductAction, {
+    errors: [],
+  });
 
-    const productData: Omit<IProduct, "id"> = {
-      nome: e.currentTarget.productName.value,
-      preco: Number(e.currentTarget.productPrice.value),
-      descricao: e.currentTarget.productDescription.value,
-      estoque: Number(e.currentTarget.productStock.value),
-      importado: e.currentTarget.productImported.value === "true" ? 1 : 0,
-    };
-
-    try {
-      const product = await addProductAction(productData);
-
-      if (product) {
-        revalidateTagAction("products");
-        redirectAction("/products");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log(state, "state");
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form action={formActions}>
       <label htmlFor="productName">Nome</label>
       <input id="productName" type="text" name="productName" />
 
@@ -46,8 +29,12 @@ export default function AddProducstPage() {
         <input id="productImported" type="checkbox" name="productImported" />
         Importado
       </label>
-
-      <button type="submit">Adicionar</button>
+      {state.errors.map((error, i) => (
+        <p style={{ color: "red" }} key={i}>
+          {error}
+        </p>
+      ))}
+      <ButtonForm />
     </form>
   );
 }

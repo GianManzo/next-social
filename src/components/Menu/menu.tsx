@@ -24,7 +24,7 @@ export default function Menu() {
           <Link href="/products">Produtos</Link>
         </li>
         <li>
-          <Link href="products/add">Adicionar Produto</Link>
+          <Link href="/products/add">Adicionar Produto</Link>
         </li>
         <li>
           <Link href="/actions">Ações</Link>
