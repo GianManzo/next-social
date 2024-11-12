@@ -1,7 +1,7 @@
-import { listProducts } from "@/actions/products";
+import { listProductsAction } from "@/actions/products";
 
 export default async function ProductsPage() {
-  const products = await listProducts();
+  const products = await listProductsAction();
 
   return (
     <div>

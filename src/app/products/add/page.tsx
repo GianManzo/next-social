@@ -1,6 +1,6 @@
 "use client";
 
-import { addProduct } from "@/actions/products";
+import { addProductAction, IProduct } from "@/actions/products";
 import { redirectAction } from "@/actions/redirect";
 import { revalidateTagAction } from "@/actions/revalidate";
 
@@ -8,20 +8,16 @@ export default function AddProducstPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const productName = e.currentTarget.productName.value;
-    const productPrice = e.currentTarget.productPrice.value;
-    const productDescription = e.currentTarget.productDescription.value;
-    const productStock = e.currentTarget.productStock.value;
-    const productImported = e.currentTarget.productImported.value;
+    const productData: Omit<IProduct, "id"> = {
+      nome: e.currentTarget.productName.value,
+      preco: Number(e.currentTarget.productPrice.value),
+      descricao: e.currentTarget.productDescription.value,
+      estoque: Number(e.currentTarget.productStock.value),
+      importado: e.currentTarget.productImported.value === "true" ? 1 : 0,
+    };
 
     try {
-      const product = await addProduct({
-        descricao: productDescription,
-        estoque: Number(productStock),
-        importado: productImported === "true" ? 1 : 0,
-        nome: productName,
-        preco: Number(productPrice),
-      });
+      const product = await addProductAction(productData);
 
       if (product) {
         revalidateTagAction("products");

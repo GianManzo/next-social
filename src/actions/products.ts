@@ -1,6 +1,6 @@
 "use server";
 
-interface IProduct {
+export interface IProduct {
   id: number;
   nome: string;
   preco: number;
@@ -9,7 +9,7 @@ interface IProduct {
   importado: 0 | 1;
 }
 
-export const listProducts = async (): Promise<IProduct[]> => {
+export const listProductsAction = async (): Promise<IProduct[]> => {
   try {
     const response = await fetch(`https://api.origamid.online/produtos`, {
       method: "GET",
@@ -25,7 +25,7 @@ export const listProducts = async (): Promise<IProduct[]> => {
   }
 };
 
-export const addProduct = async (product: Omit<IProduct, "id">) => {
+export const addProductAction = async (product: Omit<IProduct, "id">) => {
   const { descricao, preco, nome, estoque, importado } = product;
   try {
     const response = await fetch(`https://api.origamid.online/produtos`, {
