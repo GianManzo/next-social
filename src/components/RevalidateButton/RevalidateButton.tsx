@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  revalidatePathAction,
-  revalidateTagAction,
-} from "@/actions/revalidate";
+import { revalidateTagAction } from "@/actions/revalidate";
 
 export const RevalidateButton = () => {
   const handleClick = () => {

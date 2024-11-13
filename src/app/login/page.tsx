@@ -1,7 +1,6 @@
 "use client";
 
 import { login } from "@/actions/login";
-import { loginAPI } from "@/api/login.api";
 
 export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -9,8 +9,6 @@ export default function AddProducstPage() {
     errors: [],
   });
 
-  console.log(state, "state");
-
   return (
     <form action={formActions}>
       <label htmlFor="productName">Nome</label>

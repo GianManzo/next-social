@@ -1,8 +1,15 @@
-import { getCourse } from "@/api/courses.api";
+import { getCourse, getCourses } from "@/api/courses.api";
 import Link from "next/link";
 
 interface Params {
   course: string;
+}
+
+export async function generateStaticParams() {
+  const courses = await getCourses();
+  return courses.map((course) => ({
+    course: course.slug,
+  }));
 }
 
 export default async function CoursePage({
