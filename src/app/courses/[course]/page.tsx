@@ -1,6 +1,7 @@
 import { getCourse, getCourses } from "@/api/courses.api";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface Params {
   course: string;
@@ -33,7 +34,7 @@ export default async function CoursePage({
 }) {
   const { course } = await params;
   const data = await getCourse({ course });
-
+  if (data.error) return notFound();
   return (
     <div>
       <Link href={`/courses`}>Voltar</Link>
@@ -43,7 +44,7 @@ export default async function CoursePage({
       <p>Total de aulas: {data.total_aulas}</p>
       <h2>Aulas</h2>
       <ul>
-        {data.aulas.map((aula) => (
+        {data.aulas?.map((aula) => (
           <li key={aula.id}>
             <Link href={`/courses/${data.slug}/${aula.slug}`}>{aula.nome}</Link>
           </li>

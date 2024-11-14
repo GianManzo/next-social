@@ -2,6 +2,7 @@ import { getClass, getCourse, getCourses } from "@/api/courses.api";
 import { IClass } from "@/interfaces/courses.interfaces";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface Params {
   class: string;
@@ -42,7 +43,7 @@ export default async function ClassPage({
 }) {
   const { class: classParams, course } = await params;
   const data = await getClass({ classSlug: classParams, courseSlug: course });
-
+  if (data.error) return notFound();
   return (
     <div>
       <Link href={`/courses/${course}`}>Voltar</Link>

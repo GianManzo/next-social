@@ -5,6 +5,7 @@ export interface ICourse {
   descricao: string;
   total_aulas: number;
   total_horas: number;
+  error?: string;
 }
 
 export interface IClass {
@@ -15,6 +16,7 @@ export interface IClass {
   curso_id: number;
   tempo: number;
   ordem: number;
+  error?: string;
 }
 
 export interface IClassParams {
