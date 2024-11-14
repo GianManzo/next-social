@@ -1,5 +1,6 @@
 import { getClass, getCourse, getCourses } from "@/api/courses.api";
 import { IClass } from "@/interfaces/courses.interfaces";
+import { Metadata } from "next";
 import Link from "next/link";
 
 interface Params {
@@ -19,6 +20,19 @@ export async function generateStaticParams() {
       course: courses.find((course) => course.id === aula.curso_id)?.slug,
       class: aula.slug,
     }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { class: classParams, course } = await params;
+  const data = await getClass({ classSlug: classParams, courseSlug: course });
+  return {
+    title: data.nome,
+    description: data.descricao,
+  };
 }
 
 export default async function ClassPage({

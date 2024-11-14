@@ -1,4 +1,5 @@
 import { getCourse, getCourses } from "@/api/courses.api";
+import { Metadata } from "next";
 import Link from "next/link";
 
 interface Params {
@@ -10,6 +11,19 @@ export async function generateStaticParams() {
   return courses.map((course) => ({
     course: course.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { course } = await params;
+  const data = await getCourse({ course });
+  return {
+    title: data.nome,
+    description: data.descricao,
+  };
 }
 
 export default async function CoursePage({
