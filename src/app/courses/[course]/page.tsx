@@ -37,7 +37,6 @@ export default async function CoursePage({
   if (data.error) return notFound();
   return (
     <div>
-      <Link href={`/courses`}>Voltar</Link>
       <h1>{data.nome}</h1>
       <p>{data.descricao}</p>
       <p>Total de horas: {data.total_horas} hrs</p>
