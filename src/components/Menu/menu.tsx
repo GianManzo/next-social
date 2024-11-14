@@ -31,6 +31,9 @@ export default function Menu() {
         <li>
           <Link href="/actions">Ações: {params?.action}</Link>
         </li>
+        <li>
+          <Link href="/animals">Animais</Link>
+        </li>
         {loading ? (
           <></>
         ) : (
