@@ -2,7 +2,7 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
 
-> Studies in nextjs.
+> nextjs.
 
 <!-- ### Adjustments and improvements
 
