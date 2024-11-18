@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import Menu from "@/components/Menu/Menu";
+import { font_body, font_title } from "@/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,9 +14,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log(font_body);
   return (
     <html lang="pt-br">
-      <body>
+      <body
+        className={`${font_body.className} ${font_body.variable} ${font_title.variable}`}
+      >
         <Menu />
         {children}
       </body>
