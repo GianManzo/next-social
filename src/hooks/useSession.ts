@@ -31,6 +31,7 @@ export const useSession = () => {
       setLoading(true);
       await deleteCookies("token");
       setUserLogged({ autorizado: false, usuario: "" });
+      window.location.href = "/login";
     } catch (error) {
       console.log(error);
     }
